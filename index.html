@@ -147,7 +147,8 @@ section{position:relative;z-index:2}
 /* SERVICES BENTO */
 .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
 .card{position:relative;border-radius:22px;padding:1.5px;background:linear-gradient(150deg,rgba(255,255,255,.1),rgba(255,255,255,.015) 55%);overflow:hidden;transition:transform .6s var(--easeb)}
-.card .inner{position:relative;height:100%;border-radius:20.5px;background:linear-gradient(170deg,var(--panel2),var(--ink2));padding:26px;display:flex;flex-direction:column;justify-content:space-between;min-height:190px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.card .inner{position:relative;height:100%;border-radius:20.5px;background:linear-gradient(170deg,var(--panel2),var(--ink2));padding:26px;display:flex;flex-direction:column;justify-content:flex-start;gap:14px;min-height:170px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.card .inner p{margin-top:0}
 .card .inner::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 68%);top:-120px;right:-90px;opacity:0;transition:opacity .6s var(--easea)}
 .card:hover{transform:translateY(-5px)}
 .card:hover .inner::after{opacity:.55}
@@ -160,8 +161,8 @@ section{position:relative;z-index:2}
 .card.feat .inner{min-height:230px;justify-content:flex-start;gap:20px;background:linear-gradient(150deg,#14181d,#080a0c)}
 .card.feat h3{font-size:clamp(30px,3.6vw,50px)}
 .svc-note{margin-top:16px;font-size:12.5px;color:var(--faint)}
-.ph{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);border:1px dashed rgba(231,197,138,.4);border-radius:999px;padding:6px 13px;background:rgba(231,197,138,.05)}
-.ph .d{width:5px;height:5px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px rgba(231,197,138,.7)}
+.ph{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--line);border-radius:999px;padding:6px 13px;background:rgba(255,255,255,.03)}
+.ph .d{width:5px;height:5px;border-radius:50%;background:var(--led);box-shadow:0 0 8px var(--glow)}
 
 /* ACADEMY */
 .academy{position:relative;overflow:hidden}
@@ -597,25 +598,35 @@ const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   build(); onScroll(); requestAnimationFrame(draw);
 })();
 
-/* ---------- LENIS SMOOTH SCROLL ---------- */
-if(!RM){
-  const lenis = new Lenis({duration:1.05, smoothWheel:true, syncTouch:false, easing:t=>1-Math.pow(1-t,3)});
-  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-  requestAnimationFrame(raf);
-  lenis.on('scroll', ()=>{ if(window.__st) ScrollTrigger.update(); });
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', e=>{
-      const id=a.getAttribute('href'); if(id.length<2) return;
-      const el=document.querySelector(id); if(el){ e.preventDefault(); lenis.scrollTo(el,{offset:-20}); }
-    });
-  });
+/* ---------- LENIS SMOOTH SCROLL (fail-safe: never let a CDN miss blank the page) ---------- */
+let lenis=null;
+if(!RM && window.Lenis){
+  try{
+    lenis = new Lenis({duration:1.05, smoothWheel:true, syncTouch:false, easing:t=>1-Math.pow(1-t,3)});
+    const raf=(time)=>{ lenis.raf(time); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    lenis.on('scroll', ()=>{ if(window.__st && window.ScrollTrigger) ScrollTrigger.update(); });
+  }catch(e){ lenis=null; }
 }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id=a.getAttribute('href'); if(id.length<2) return;
+    const el=document.querySelector(id); if(!el) return;
+    e.preventDefault();
+    if(lenis){ lenis.scrollTo(el,{offset:-20}); } else { el.scrollIntoView({behavior:'smooth'}); }
+  });
+});
 
-/* ---------- REVEAL ON SCROLL ---------- */
-const io = new IntersectionObserver((ents)=>{
-  ents.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
-},{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
-document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4)*0.06+'s'; io.observe(el); });
+/* ---------- REVEAL ON SCROLL (fail-safe) ---------- */
+const revs = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver((ents)=>{
+    ents.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  revs.forEach((el,i)=>{ el.style.transitionDelay=(i%4)*0.06+'s'; io.observe(el); });
+  // belt-and-suspenders: force-show anything already in view after load settles
+  setTimeout(()=>{ revs.forEach(e=>{ if(e.getBoundingClientRect().top < window.innerHeight*1.1) e.classList.add('in'); }); }, 2000);
+}else{ revs.forEach(e=>e.classList.add('in')); }
 
 /* ---------- MJ IMAGE-EXPANSION ---------- */
 if(!RM && window.gsap){
