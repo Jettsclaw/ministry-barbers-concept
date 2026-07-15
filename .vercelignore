@@ -1,5 +1,4 @@
+*.md
 .playwright-mcp/
 *.log
-v1-*.png
-.vercel
-.env*
+README*
