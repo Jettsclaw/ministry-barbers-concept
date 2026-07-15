@@ -52,3 +52,25 @@ Spec §7.2 locks amber as the single warm accent for the academy "SOLD OUT" only
 - Reviews use real first names and real review text (spec rule 1) — the "owner leads from the front" quote is the intended emotional core.
 
 **Bottom line:** ships as a concept pitch now. Fix Finding 1 before it's the artifact MJ judges Automaitions by.
+
+---
+
+## RESOLUTION — fixes applied post-verify (Winston, 2026-07-15, commit ef07440)
+
+A **second** independent pass (general-purpose agent, briefed only on goal + live URL) ran in parallel and surfaced conversion/mobile issues; both verifiers' findings were resolved together. Every fix re-verified by screenshot at 1440 + 390.
+
+- **Finding 1 (HIGH — CDN blank-page risk): FIXED.** Lenis init wrapped in `try/catch` + guarded on `window.Lenis`; anchor scrolling falls back to native `scrollIntoView`; reveal observer decoupled from Lenis with a 2s force-show failsafe and a no-IntersectionObserver fallback. A CDN miss can no longer abort the script or hide content. Console clean, reveals confirmed firing.
+- **Finding 2 (amber used 3×): FIXED.** Placeholder "coming soon" pills desaturated to chrome/muted; amber now appears **only** on the academy "SOLD OUT" — spec §7.2 honoured.
+- **Finding 3 ("Berri" name): NO CHANGE NEEDED.** "Berri" (Mohammad Berri) is a **real** Ministry barber/manager — the most-praised name in their Google reviews (per research). Grounded, not invented; kept for authenticity.
+- **Finding 4 (academy CTA → booking teaser): FIXED (interim).** Academy CTA now `tel:0499917776` (a real action); the dedicated application/deposit funnel remains the client-build item per STRATEGY-SPEC §9.
+
+### Second-pass findings also resolved
+- **BLOCKER — all Book CTAs dead-ended at "coming soon": FIXED.** Every Book CTA now `tel:0499917776`; app-teaser gained an explicit "call to book" fallback button.
+- **HIGH — no mobile nav + unlabeled arrow CTA: FIXED.** Added hamburger → full-screen glass menu (verified open/close at 390px); nav CTA labelled "Book" + `aria-label`.
+- **MEDIUM — 2010/2011 timeline contradiction: FIXED.** Prose reconciled with the timeline chips.
+- **MEDIUM — fake-interactive phone mockup: FIXED.** Screen set `pointer-events:none`; "Preview" badge retained.
+- **MEDIUM — hollow feature-card void: FIXED.** All service cards now top-align copy under the heading.
+- **Jett polish — "legend" descender clipping: FIXED.** line-height + padding; "g" fully visible.
+- **Jett polish — SBS/Ch9 trust banner + stats-as-marquee: DONE.** Real SBS wordmark + Nine "9" logo (Wikimedia Commons, mono-white) now scroll in one subtle trust marquee under the hero.
+
+**Post-fix status:** showstopping AND converting (real call-to-book on every CTA) AND easy to use (working mobile menu, CDN-resilient). Remaining items are client-side (fact sign-off + the real booking/academy funnels), tracked in STRATEGY-SPEC §9.
