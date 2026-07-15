@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Ministry Barbers — Industry Leaders | Bass Hill, Sydney</title>
+<meta name="description" content="Sydney's leading barbers. Precision cuts, skin fades & the Ministry Barbers Academy — turn your passion into profession." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#050506; --ink2:#08090b; --panel:#0d0f12; --panel2:#101317;
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.05);
+  --led:#eaf1ff; --glow:rgba(198,222,255,.55);
+  --text:#eef1f5; --muted:#9aa1ab; --faint:#5b616b;
+  --chrome1:#ffffff; --chrome2:#c3c9d2; --chrome3:#7d838d;
+  --amber:#e7c58a;
+  --easea:cubic-bezier(.22,.61,.19,1); --easeb:cubic-bezier(.32,.72,0,1);
+  --maxw:1280px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{
+  background:var(--ink); color:var(--text);
+  font-family:"Plus Jakarta Sans",sans-serif; font-weight:400;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden; line-height:1.55;
+}
+::selection{background:rgba(234,241,255,.85); color:#050506}
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+.wrap{width:100%; max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,64px)}
+
+h1,h2,h3,.disp{font-family:"Anton",sans-serif; font-weight:400; letter-spacing:.01em; line-height:.94; text-transform:uppercase}
+.chrome{background:linear-gradient(176deg,#fff 8%,var(--chrome2) 46%,#9aa0aa 62%,#eef2f7 96%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font-family:"Plus Jakarta Sans";font-weight:600;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+.eyebrow .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--led);box-shadow:0 0 10px 2px var(--glow);margin-right:12px;vertical-align:middle;transform:translateY(-1px)}
+
+/* fixed grain + vignette */
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.045;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 80% at 50% 0%,transparent 40%,rgba(0,0,0,.55) 100%)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:center;padding:18px 0;transition:padding .5s var(--easeb)}
+.navbar{display:flex;align-items:center;gap:clamp(18px,3vw,40px);padding:11px 12px 11px 22px;border-radius:999px;
+  background:rgba(10,11,13,.55);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);
+  border:1px solid var(--line);box-shadow:0 10px 40px -12px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06)}
+.navbar img{height:26px;width:auto;filter:drop-shadow(0 0 8px rgba(198,222,255,.15))}
+.navlinks{display:flex;gap:26px}
+.navlinks a{font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.02em;transition:color .3s var(--easea);position:relative}
+.navlinks a:hover{color:var(--text)}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--led);box-shadow:0 0 8px var(--glow);transition:width .35s var(--easeb)}
+.navlinks a:hover::after{width:100%}
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:11px 12px 11px 22px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.01em;cursor:pointer;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.02));color:#fff;transition:transform .5s var(--easeb),background .4s,box-shadow .5s;white-space:nowrap}
+.btn:hover{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));box-shadow:0 8px 30px -8px rgba(198,222,255,.35)}
+.btn:active{transform:scale(.97)}
+.btn .ico{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);transition:transform .5s var(--easeb),background .4s}
+.btn:hover .ico{transform:translate(3px,-2px);background:rgba(255,255,255,.18)}
+.btn.solid{background:linear-gradient(180deg,#fff,#d5dae2);color:#08090b;border-color:transparent;box-shadow:0 8px 34px -10px rgba(198,222,255,.5)}
+.btn.solid .ico{background:rgba(0,0,0,.1)}
+.btn.solid:hover{box-shadow:0 12px 44px -8px rgba(198,222,255,.75)}
+.navtoggle{display:none}
+
+/* HERO */
+.hero{position:relative;min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding-bottom:clamp(28px,5vh,60px)}
+#ceiling{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+.hero-fade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(5,5,6,.15) 0%,rgba(5,5,6,0) 30%,rgba(5,5,6,.35) 62%,rgba(5,5,6,.96) 100%)}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero-ey{opacity:0;transform:translateY(12px);animation:rise .9s .2s var(--easea) forwards}
+.hero h1{font-size:clamp(52px,12.5vw,190px);margin:14px 0 0;letter-spacing:-.005em}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln span{display:block;transform:translateY(105%);animation:lnRise 1.05s var(--easeb) forwards}
+.hero h1 .ln:nth-child(1) span{animation-delay:.32s}
+.hero h1 .ln:nth-child(2) span{animation-delay:.44s}
+.hero-sub{max-width:540px;margin-top:26px;font-size:clamp(15px,1.35vw,18px);color:var(--muted);opacity:0;transform:translateY(12px);animation:rise .9s .9s var(--easea) forwards}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;opacity:0;transform:translateY(12px);animation:rise .9s 1.05s var(--easea) forwards}
+.hero-cta .btn{padding:15px 16px 15px 26px;font-size:14px}
+.scrollcue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;opacity:0;animation:rise 1s 1.5s var(--easea) forwards}
+.scrollcue .bar{width:1px;height:44px;background:linear-gradient(var(--led),transparent);position:relative;overflow:hidden}
+.scrollcue .bar::after{content:"";position:absolute;top:-40%;left:0;width:100%;height:40%;background:var(--led);box-shadow:0 0 10px var(--glow);animation:drop 1.9s var(--easeb) infinite}
+.scrollcue span{font-size:9px;letter-spacing:.32em;color:var(--faint);text-transform:uppercase}
+@keyframes drop{0%{top:-45%}70%{top:110%}100%{top:110%}}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+@keyframes lnRise{to{transform:translateY(0)}}
+
+/* STAT STRIP */
+.stats{position:relative;z-index:2;border-top:1px solid var(--line2)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.stat{padding:30px 8px 30px 0}
+.stat .n{font-family:"Anton";font-size:clamp(30px,4.4vw,54px);line-height:1;letter-spacing:0}
+.stat .l{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-top:9px}
+
+/* MARQUEE */
+.marq{border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:20px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:2;background:var(--ink2)}
+.marq-t{display:inline-block;animation:scroll 34s linear infinite;font-family:"Anton";font-size:clamp(24px,3vw,38px);text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.34)}
+.marq-t span{margin:0 26px}.marq-t .hi{color:var(--text);-webkit-text-stroke:0}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* SECTION scaffold */
+section{position:relative;z-index:2}
+.blk{padding:clamp(88px,13vh,180px) 0}
+.sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:clamp(44px,6vh,80px)}
+.sechead h2{font-size:clamp(38px,6.6vw,104px);max-width:14ch}
+.sechead .side{max-width:360px;color:var(--muted);font-size:15px;padding-bottom:8px}
+.reveal{opacity:0;transform:translateY(34px);filter:blur(8px);transition:opacity 1s var(--easea),transform 1.1s var(--easeb),filter 1s var(--easea)}
+.reveal.in{opacity:1;transform:none;filter:blur(0)}
+.hexrule{height:1px;width:100%;background:var(--line2);position:relative}
+.hexrule::before{content:"";position:absolute;left:50%;top:-2px;width:5px;height:5px;transform:translateX(-50%);border-radius:50%;background:var(--led);box-shadow:0 0 12px 2px var(--glow)}
+
+/* MJ STORY */
+.story{display:grid;grid-template-columns:0.95fr 1.05fr;gap:clamp(40px,6vw,90px);align-items:center}
+.story-imgwrap{position:relative;border-radius:26px;padding:8px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.01));border:1px solid var(--line);overflow:hidden}
+.story-img{position:relative;overflow:hidden;border-radius:19px;aspect-ratio:4/4.7}
+.story-img img{width:100%;height:100%;object-fit:cover;transform:scale(1.28);will-change:transform;filter:grayscale(.15) contrast(1.03)}
+.story-tag{position:absolute;left:16px;bottom:16px;z-index:3;background:rgba(8,9,11,.62);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:11px 16px}
+.story-tag b{font-family:"Anton";font-size:19px;letter-spacing:.02em;display:block}
+.story-tag small{color:var(--muted);font-size:11.5px;letter-spacing:.03em}
+.story h2{font-size:clamp(34px,5vw,72px);margin-bottom:26px}
+.story p{color:var(--muted);font-size:16px;margin-bottom:18px;max-width:52ch}
+.story p b{color:var(--text);font-weight:600}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.badge{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:9px 15px;background:rgba(255,255,255,.02)}
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+.tl-i{border-top:1px solid var(--line);padding-top:18px;position:relative}
+.tl-i::before{content:"";position:absolute;top:-3.5px;left:0;width:6px;height:6px;border-radius:50%;background:var(--led);box-shadow:0 0 12px 2px var(--glow)}
+.tl-i .y{font-family:"Anton";font-size:26px}.tl-i .t{color:var(--faint);font-size:12.5px;margin-top:6px}
+
+/* SERVICES BENTO */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{position:relative;border-radius:22px;padding:1.5px;background:linear-gradient(150deg,rgba(255,255,255,.1),rgba(255,255,255,.015) 55%);overflow:hidden;transition:transform .6s var(--easeb)}
+.card .inner{position:relative;height:100%;border-radius:20.5px;background:linear-gradient(170deg,var(--panel2),var(--ink2));padding:26px;display:flex;flex-direction:column;justify-content:space-between;min-height:190px;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.card .inner::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 68%);top:-120px;right:-90px;opacity:0;transition:opacity .6s var(--easea)}
+.card:hover{transform:translateY(-5px)}
+.card:hover .inner::after{opacity:.55}
+.card h3{font-family:"Anton";font-size:clamp(22px,2.3vw,30px);letter-spacing:.02em}
+.card p{color:var(--muted);font-size:14px;margin-top:10px;max-width:34ch}
+.card .no{font-size:12px;color:var(--faint);letter-spacing:.1em;font-weight:600}
+.card .hex{position:absolute;right:22px;top:22px;width:26px;height:29px;opacity:.4;transition:opacity .5s,transform .6s var(--easeb)}
+.card:hover .hex{opacity:.9;transform:rotate(30deg)}
+.c8{grid-column:span 8}.c6{grid-column:span 6}.c4{grid-column:span 4}.c5{grid-column:span 5}.c7{grid-column:span 7}.c3{grid-column:span 3}
+.card.feat .inner{min-height:300px;background:linear-gradient(150deg,#14181d,#080a0c)}
+.card.feat h3{font-size:clamp(30px,3.6vw,50px)}
+.svc-note{margin-top:16px;font-size:12.5px;color:var(--faint)}
+.ph{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);border:1px dashed rgba(231,197,138,.4);border-radius:999px;padding:6px 13px;background:rgba(231,197,138,.05)}
+.ph .d{width:5px;height:5px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px rgba(231,197,138,.7)}
+
+/* ACADEMY */
+.academy{position:relative;overflow:hidden}
+.academy .abg{position:absolute;inset:0;z-index:0}
+.academy .abg img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;filter:grayscale(.2) brightness(.42) contrast(1.05)}
+.academy .abg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--ink) 2%,rgba(5,5,6,.55) 30%,rgba(5,5,6,.72) 70%,var(--ink) 100%)}
+.academy .wrap{position:relative;z-index:2}
+.aca-top{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:end;margin-bottom:56px}
+.academy h2{font-size:clamp(44px,8.5vw,150px)}
+.academy .lead{color:var(--muted);font-size:17px;max-width:44ch}
+.academy .lead b{color:#fff;font-weight:600}
+.aca-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:44px}
+.aca-cell{border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(10,12,15,.5);backdrop-filter:blur(6px)}
+.aca-cell .k{font-family:"Anton";font-size:clamp(26px,3.6vw,46px);line-height:1}
+.aca-cell .k.sold{color:var(--amber)}
+.aca-cell .v{color:var(--muted);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-top:9px}
+.curric{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px}
+.curric span{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:10px 17px;background:rgba(255,255,255,.02);transition:.4s var(--easea)}
+.curric span:hover{color:#fff;border-color:rgba(198,222,255,.4);background:rgba(198,222,255,.06)}
+
+/* APP TEASER */
+.app{display:grid;grid-template-columns:1fr 0.86fr;gap:clamp(40px,6vw,80px);align-items:center}
+.app h2{font-size:clamp(38px,6vw,92px);margin-bottom:24px}
+.app p{color:var(--muted);font-size:16px;max-width:46ch;margin-bottom:20px}
+.app .feats{display:flex;flex-direction:column;gap:14px;margin-top:30px}
+.app .feat-r{display:flex;gap:15px;align-items:flex-start}
+.app .feat-r .fi{flex:none;width:34px;height:38px;position:relative;top:2px}
+.app .feat-r b{display:block;font-size:15.5px;color:var(--text);font-weight:600}
+.app .feat-r small{color:var(--muted);font-size:13.5px}
+.phone{position:relative;justify-self:center;width:min(300px,74vw);aspect-ratio:9/19;border-radius:44px;padding:11px;background:linear-gradient(160deg,#20242a,#0a0b0d);border:1px solid var(--line);box-shadow:0 40px 90px -30px rgba(0,0,0,.9),0 0 60px -20px rgba(198,222,255,.2)}
+.phone .scr{position:relative;height:100%;border-radius:34px;background:linear-gradient(180deg,#0b0d10,#050506);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.phone .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:92px;height:22px;background:#000;border-radius:999px;z-index:4}
+.scr-in{padding:40px 18px 18px;height:100%;display:flex;flex-direction:column}
+.scr-in .mlogo{height:16px;width:auto;margin:0 auto 20px;opacity:.9}
+.scr-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.scr-slot{border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.02)}
+.scr-slot .a{display:flex;flex-direction:column;gap:3px}
+.scr-slot b{font-size:12.5px}.scr-slot small{font-size:10px;color:var(--faint)}
+.scr-slot .pill{font-size:9px;color:var(--led);border:1px solid rgba(198,222,255,.3);border-radius:999px;padding:4px 9px}
+.scr-slot.sel{border-color:rgba(198,222,255,.5);background:rgba(198,222,255,.07)}
+.scr-times{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:4px 0 14px}
+.scr-times i{font-style:normal;font-size:10.5px;text-align:center;padding:8px 0;border:1px solid var(--line);border-radius:9px;color:var(--muted)}
+.scr-times i.on{background:#fff;color:#08090b;border-color:transparent;font-weight:600}
+.scr-book{margin-top:auto;text-align:center;background:linear-gradient(180deg,#fff,#d5dae2);color:#08090b;font-weight:700;font-size:12.5px;padding:13px;border-radius:13px}
+.app-ph{position:absolute;top:-14px;right:-6px;z-index:5}
+
+/* SHOP */
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.prod{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:linear-gradient(180deg,var(--panel),var(--ink2));transition:transform .6s var(--easeb),border-color .5s}
+.prod:hover{transform:translateY(-6px);border-color:rgba(198,222,255,.3)}
+.prod .pimg{aspect-ratio:1;background:radial-gradient(circle at 50% 40%,#1a1e24,#08090b 72%);display:flex;align-items:center;justify-content:center;padding:22px}
+.prod .pimg img{max-height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.6))}
+.prod .pmeta{padding:18px 18px 22px;border-top:1px solid var(--line2)}
+.prod .pmeta b{font-size:14px;font-weight:600;display:block}
+.prod .pmeta .pr{color:var(--muted);font-size:13px;margin-top:6px}
+
+/* REVIEWS */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev{border:1px solid var(--line);border-radius:18px;padding:26px;background:linear-gradient(170deg,var(--panel),var(--ink2))}
+.rev .st{color:var(--led);letter-spacing:3px;font-size:13px;margin-bottom:14px;text-shadow:0 0 12px var(--glow)}
+.rev p{font-size:14.5px;color:var(--text);line-height:1.6}
+.rev .who{margin-top:16px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* FINAL CTA */
+.final{text-align:center;padding:clamp(100px,16vh,220px) 0}
+.final .eyebrow{justify-content:center;display:block;margin-bottom:26px}
+.final h2{font-size:clamp(44px,10vw,168px);margin-bottom:20px}
+.final h2 em{font-style:italic;font-family:"Plus Jakarta Sans";font-weight:300;text-transform:none;letter-spacing:-.01em}
+.final p{color:var(--muted);max-width:44ch;margin:0 auto 40px;font-size:16px}
+.final .hero-cta{justify-content:center}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:60px 0 46px;position:relative;z-index:2}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.foot img{height:30px;margin-bottom:16px}
+.foot .fcol h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:16px}
+.foot .fcol a,.foot .fcol p{display:block;color:var(--muted);font-size:14px;margin-bottom:9px;transition:color .3s}
+.foot .fcol a:hover{color:#fff}
+.foot-bot{margin-top:50px;padding-top:24px;border-top:1px solid var(--line2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;color:var(--faint);font-size:12px}
+.foot-bot a{color:var(--faint)}
+.credit{color:var(--faint);font-size:12px}
+.credit b{color:var(--muted)}
+
+@media(max-width:940px){
+  .navlinks,.nav-cta-lbl{display:none}
+  .story,.app,.aca-top{grid-template-columns:1fr}
+  .app .phone{grid-row:1;margin-bottom:20px}
+  .bento .c8,.bento .c6,.bento .c4,.bento .c5,.bento .c7,.bento .c3{grid-column:span 12}
+  .aca-grid,.shop-grid{grid-template-columns:repeat(2,1fr)}
+  .rev-grid,.tl{grid-template-columns:1fr}
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+  .story{gap:34px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;transition-duration:.1s!important}
+  .hero h1 .ln span{transform:none}.reveal{opacity:1;transform:none;filter:none}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="vig"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="navbar">
+    <img src="./assets/logo.webp" alt="Ministry Barbers" />
+    <div class="navlinks">
+      <a href="#story">The Story</a>
+      <a href="#services">Services</a>
+      <a href="#academy">Academy</a>
+      <a href="#shop">Shop</a>
+    </div>
+    <a class="btn solid" href="#book"><span class="nav-cta-lbl">Book Now</span><span class="ico">→</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <canvas id="ceiling"></canvas>
+  <div class="hero-fade"></div>
+  <div class="wrap">
+    <div class="hero-ey eyebrow"><span class="dot"></span>Bass Hill · Sydney · Est. 2020</div>
+    <h1>
+      <span class="ln"><span>We are the</span></span>
+      <span class="ln"><span class="chrome">Industry Leaders</span></span>
+    </h1>
+    <p class="hero-sub">Precision cuts, flawless skin fades and the grooming experience Sydney travels for — built on faith, patience and relentless craft.</p>
+    <div class="hero-cta">
+      <a class="btn solid" href="#book">Book your chair <span class="ico">→</span></a>
+      <a class="btn" href="#academy">Join the Academy <span class="ico">↗</span></a>
+    </div>
+  </div>
+  <div class="scrollcue"><div class="bar"></div><span>Scroll</span></div>
+</header>
+
+<!-- STATS -->
+<section class="stats"><div class="wrap">
+  <div class="stat reveal"><div class="n chrome">4.6★</div><div class="l">230 Google reviews</div></div>
+  <div class="stat reveal"><div class="n chrome">553K</div><div class="l">TikTok community</div></div>
+  <div class="stat reveal"><div class="n chrome">11M</div><div class="l">Likes & counting</div></div>
+  <div class="stat reveal"><div class="n chrome">100%</div><div class="l">Owner on the floor</div></div>
+</div></section>
+
+<!-- MARQUEE -->
+<div class="marq"><div class="marq-t">
+  <span class="hi">Skin Fades</span><span>✦</span><span>Tapers</span><span>✦</span><span class="hi">Beard Sculpting</span><span>✦</span><span>Ministry VIP</span><span>✦</span><span class="hi">Kids' Cuts</span><span>✦</span><span>The Academy</span><span>✦</span>
+  <span class="hi">Skin Fades</span><span>✦</span><span>Tapers</span><span>✦</span><span class="hi">Beard Sculpting</span><span>✦</span><span>Ministry VIP</span><span>✦</span><span class="hi">Kids' Cuts</span><span>✦</span><span>The Academy</span><span>✦</span>
+</div></div>
+
+<!-- STORY -->
+<section id="story" class="blk"><div class="wrap">
+  <div class="story">
+    <div class="story-imgwrap reveal">
+      <div class="story-img"><img id="mjimg" src="./assets/mj-portrait.webp" alt="MJ — founder of Ministry Barbers" /></div>
+      <div class="story-tag"><b>Mohamad "MJ" El Haj</b><small>Founder · Master Barber · Educator</small></div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom:22px"><span class="dot"></span>Who is MJ</div>
+      <h2 class="chrome">From refugee<br>to the front chair</h2>
+      <p>In 2011, MJ arrived in Australia as a refugee with a pair of scissors and a conviction that the work matters beyond the mirror. He honed his craft in barbershops across the country — then built <b>Ministry Barbers</b> into one of Sydney's leading names.</p>
+      <p>He introduced the <b>first barbering program in NSW high schools</b>, has been featured on <b>SBS World News</b> and <b>Channel 9</b>, and today mentors the next generation through the Ministry Barbers Academy.</p>
+      <div class="badges">
+        <span class="badge">SBS World News</span><span class="badge">Channel 9</span><span class="badge">NSW Schools First</span><span class="badge">Faith · Patience · Success</span>
+      </div>
+      <div class="tl">
+        <div class="tl-i"><div class="y">2010</div><div class="t">First picked up the clippers in Lebanon</div></div>
+        <div class="tl-i"><div class="y">2011</div><div class="t">Arrived in Australia, refining the craft</div></div>
+        <div class="tl-i"><div class="y">2020</div><div class="t">Ministry Barbers is born in Bass Hill</div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SERVICES -->
+<section id="services" class="blk"><div class="wrap">
+  <div class="sechead">
+    <h2 class="reveal chrome">Every detail,<br>deliberate</h2>
+    <p class="side reveal">A great cut isn't just sharp lines — it's listening, finishing with care, and sending you out sharper than you walked in. Choose your service; the chair does the rest.</p>
+  </div>
+  <div class="bento">
+    <div class="card feat c8 reveal"><div class="inner">
+      <div><div class="no">01</div><h3>Skin Fades &amp; Tapers</h3></div>
+      <p>Flawless, blended-to-skin fades and clean tapers finished with a precision line-up. The signature Ministry look.</p>
+      <svg class="hex" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.4"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg>
+    </div></div>
+    <div class="card c4 reveal"><div class="inner">
+      <div><div class="no">02</div><h3>Men's Cuts</h3></div>
+      <p>Tailored to your style, face and hair type.</p>
+      <svg class="hex" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.4"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg>
+    </div></div>
+    <div class="card c4 reveal"><div class="inner">
+      <div><div class="no">03</div><h3>Beard Sculpting</h3></div>
+      <p>Lineup, trim and styling for a natural, sharp finish.</p>
+      <svg class="hex" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.4"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg>
+    </div></div>
+    <div class="card feat c8 reveal"><div class="inner">
+      <div><div class="no">04</div><h3>Ministry VIP</h3></div>
+      <p>The full ritual — haircut, beard, facial wax, steam therapy, mask &amp; scrub. You leave revitalised inside and out.</p>
+      <svg class="hex" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.4"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg>
+    </div></div>
+    <div class="card c6 reveal"><div class="inner">
+      <div><div class="no">05</div><h3>VIP Hair Care</h3></div>
+      <p>Restorative steam, deep-conditioning and tailored scalp care.</p>
+      <svg class="hex" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.4"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg>
+    </div></div>
+    <div class="card c6 reveal"><div class="inner">
+      <div><div class="no">06</div><h3>Kids' Cuts</h3></div>
+      <p>Fun, patient and clean — for the youngest clients in the chair.</p>
+      <svg class="hex" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.4"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg>
+    </div></div>
+  </div>
+  <div class="svc-note reveal"><span class="ph"><span class="d"></span>Live pricing &amp; instant booking via the Ministry app — coming soon</span></div>
+</div></section>
+
+<!-- ACADEMY -->
+<section id="academy" class="blk academy">
+  <div class="abg"><img src="./assets/academy-room-web.jpg" alt="Ministry Barbers Academy — training floor" /></div>
+  <div class="wrap">
+    <div class="aca-top">
+      <div>
+        <div class="eyebrow reveal" style="margin-bottom:20px"><span class="dot"></span>Ministry Barbers Academy</div>
+        <h2 class="reveal chrome">Turn your passion<br>into profession</h2>
+      </div>
+      <p class="lead reveal">Two years of shadowing, compressed into <b>three months</b> of accelerated, hands-on mastery — mentored by one of Sydney's leading barbers. You graduate with the skills, the kit, and a chair to grow into.</p>
+    </div>
+    <div class="aca-grid">
+      <div class="aca-cell reveal"><div class="k chrome">12 wks</div><div class="v">Hands-on masterclass</div></div>
+      <div class="aca-cell reveal"><div class="k chrome">$5,000</div><div class="v">Incl. pro barber kit</div></div>
+      <div class="aca-cell reveal"><div class="k chrome">28</div><div class="v">Spots per term</div></div>
+      <div class="aca-cell reveal"><div class="k sold">2026 SOLD OUT</div><div class="v">2027 intakes open</div></div>
+    </div>
+    <div class="curric reveal">
+      <span>Client Consultation</span><span>Advanced Fading</span><span>Precision Scissor Work</span><span>Shaving &amp; Straight Razor</span><span>Confidence &amp; Communication</span><span>Business of Barbering</span><span>Job Referrals</span><span>Certificate of Completion</span><span>Ongoing Mentorship</span>
+    </div>
+    <div class="reveal"><a class="btn solid" href="#book" style="padding:15px 16px 15px 26px;font-size:14px">Apply for the 2027 intake <span class="ico">→</span></a></div>
+  </div>
+</section>
+
+<!-- APP TEASER / BOOK -->
+<section id="book" class="blk"><div class="wrap">
+  <div class="app">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom:22px"><span class="dot"></span>Coming soon · Bespoke booking</div>
+      <h2 class="chrome">Your chair,<br>three taps away</h2>
+      <p>No more waiting rooms and phone tag. The Ministry app puts your barber, your service and your time in your pocket — book, reschedule and get reminders in seconds.</p>
+      <div class="feats">
+        <div class="feat-r"><svg class="fi" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.3"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg><div><b>Pick your barber &amp; time</b><small>Real-time availability across the whole team.</small></div></div>
+        <div class="feat-r"><svg class="fi" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.3"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg><div><b>Smart reminders</b><small>No no-shows, no forgotten appointments.</small></div></div>
+        <div class="feat-r"><svg class="fi" viewBox="0 0 26 29" fill="none" stroke="#eaf1ff" stroke-width="1.3"><path d="M13 1 24.3 7.5v14.5L13 28.5 1.7 22V7.5z"/></svg><div><b>Loyalty &amp; the shop, built in</b><small>Rewards, products and rebooking in one place.</small></div></div>
+      </div>
+    </div>
+    <div class="phone reveal">
+      <span class="ph app-ph"><span class="d"></span>Preview</span>
+      <div class="scr">
+        <div class="notch"></div>
+        <div class="scr-in">
+          <img class="mlogo" src="./assets/logo.webp" alt="Ministry" />
+          <div class="scr-lbl">Select service</div>
+          <div class="scr-slot sel"><div class="a"><b>Skin Fade + Beard</b><small>45 min</small></div><span class="pill">Selected</span></div>
+          <div class="scr-slot"><div class="a"><b>Ministry VIP</b><small>75 min</small></div><span class="pill">Book</span></div>
+          <div class="scr-lbl" style="margin-top:6px">Today · with Berri</div>
+          <div class="scr-times"><i>10:30</i><i class="on">11:15</i><i>12:00</i><i>1:45</i><i>2:30</i><i>4:00</i></div>
+          <div class="scr-book">Confirm booking →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SHOP -->
+<section id="shop" class="blk"><div class="wrap">
+  <div class="sechead">
+    <h2 class="reveal chrome">The Ministry<br>toolkit</h2>
+    <p class="side reveal">The same professional gear we trust on the floor and hand to every graduate — soon shoppable straight from the app.</p>
+  </div>
+  <div class="shop-grid">
+    <div class="prod reveal"><div class="pimg"><img src="./assets/starter-kit.webp" alt="Student Starter Kit" /></div><div class="pmeta"><b>Student Starter Kit</b><div class="pr">$460.00</div></div></div>
+    <div class="prod reveal"><div class="pimg"><img src="./assets/clipper.png" alt="TUFT Vista C Clipper" /></div><div class="pmeta"><b>TUFT Vista C Clipper</b><div class="pr">$270.00</div></div></div>
+    <div class="prod reveal"><div class="pimg"><img src="./assets/trimmer.png" alt="TUFT Vista T Trimmer" /></div><div class="pmeta"><b>TUFT Vista T Trimmer</b><div class="pr">$260.00</div></div></div>
+    <div class="prod reveal"><div class="pimg"><img src="./assets/shaver.png" alt="TUFT Romeo Foil Shaver" /></div><div class="pmeta"><b>TUFT Romeo Foil Shaver</b><div class="pr">$159.00</div></div></div>
+  </div>
+</div></section>
+
+<!-- REVIEWS -->
+<section class="blk" style="padding-top:0"><div class="wrap">
+  <div class="hexrule reveal" style="margin-bottom:clamp(60px,9vh,110px)"></div>
+  <div class="sechead"><h2 class="reveal chrome" style="max-width:20ch">Loved by Sydney —<br>and beyond</h2><p class="side reveal">People travel from interstate and overseas for a Ministry cut. Here's why.</p></div>
+  <div class="rev-grid">
+    <div class="rev reveal"><div class="st">★★★★★</div><p>"Walked in, jumped on a chair within 5 minutes, got a clean-as skin fade. Never felt more confident or fresher in my life. Wish I could put 6 stars."</p><div class="who">Ali</div></div>
+    <div class="rev reveal"><div class="st">★★★★★</div><p>"Came all the way from the UK for my cousin's wedding. The team understood the assignment and delivered. One of the best trims I've had."</p><div class="who">Seth</div></div>
+    <div class="rev reveal"><div class="st">★★★★★</div><p>"The owner leads from the front and makes sure his team delivers top-tier cuts every time. It's rare to find a barber this good."</p><div class="who">Moustafa</div></div>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section class="final"><div class="wrap">
+  <div class="eyebrow reveal"><span class="dot"></span>Bass Hill · Walk in, or book ahead</div>
+  <h2 class="reveal chrome">Walk out<br>a <em>legend</em>.</h2>
+  <p class="reveal">Whether you're after the sharpest cut in Sydney or a career in the chair — Ministry is where it starts.</p>
+  <div class="hero-cta reveal">
+    <a class="btn solid" href="#book">Book your chair <span class="ico">→</span></a>
+    <a class="btn" href="tel:0499917776">Call the shop <span class="ico">↗</span></a>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="foot">
+    <div class="fcol" style="max-width:300px">
+      <img src="./assets/logo.webp" alt="Ministry Barbers" />
+      <p style="color:var(--muted)">Enhance your style, enhance your skills. Sydney's home of premium barbering &amp; the next generation of barbers.</p>
+    </div>
+    <div class="fcol"><h4>Visit</h4><p>219 Miller Rd<br>Bass Hill NSW 2197</p><a href="tel:0499917776">0499 917 776</a></div>
+    <div class="fcol"><h4>Explore</h4><a href="#story">The Story</a><a href="#services">Services</a><a href="#academy">Academy</a><a href="#shop">Shop</a></div>
+    <div class="fcol"><h4>Follow</h4><a href="https://www.instagram.com/ministrybarbers/" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@ministrybarbers" target="_blank" rel="noopener">TikTok</a><a href="#book">Book Now</a></div>
+  </div>
+  <div class="foot-bot">
+    <span>© 2026 Ministry Barbers. All rights reserved.</span>
+    <span class="credit">Concept site by <b>Automaitions</b> — a taste of what's possible.</span>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- HEX LED CEILING ---------- */
+(function(){
+  const cv = document.getElementById('ceiling');
+  const ctx = cv.getContext('2d');
+  let W,H,dpr,hexes=[],mx=0.5,my=0.5,tmx=0.5,tmy=0.5;
+  let scrollN=0, pScroll=0; // smoothed hero scroll 0..1
+
+  function build(){
+    dpr = Math.min(window.devicePixelRatio||1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W*dpr; cv.height = H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    hexes=[];
+    // honeycomb cluster anchored top-centre, receding upward (perspective)
+    const R = Math.max(46, Math.min(W,H*1.1)*0.062);   // hex radius
+    const cols = Math.ceil(W/(R*1.5))+4;
+    const rows = 5;
+    const cx = W*0.5, topY = H*0.02;
+    for(let r=0;r<rows;r++){
+      // depth: row 0 = far/top/small, deeper rows = nearer/bigger
+      const depth = r/(rows-1);              // 0..1
+      const scale = 0.52 + depth*0.72;       // grow toward viewer
+      const rr = R*scale;
+      const rowY = topY + r*(rr*1.34);
+      const spread = 1.0 + depth*0.34;
+      for(let c=-Math.ceil(cols/2);c<=Math.ceil(cols/2);c++){
+        const off = (r%2)? rr*0.75 : 0;
+        const x = cx + (c*rr*1.5 + off)*spread;
+        if(x < -rr*2 || x > W+rr*2) continue;
+        hexes.push({x, y:rowY, r:rr, depth,
+          ph:Math.random()*Math.PI*2, sp:0.5+Math.random()*0.7,
+          base:0.28+depth*0.5});
+      }
+    }
+  }
+  function hexPath(x,y,r){
+    ctx.beginPath();
+    for(let i=0;i<6;i++){
+      const a = Math.PI/180*(60*i-90);
+      const px=x+r*Math.cos(a), py=y+r*Math.sin(a);
+      i?ctx.lineTo(px,py):ctx.moveTo(px,py);
+    }
+    ctx.closePath();
+  }
+  let t=0;
+  function draw(){
+    t += RM?0:0.016;
+    pScroll += (scrollN - pScroll)*0.16;
+    tmx += (mx-tmx)*0.06; tmy += (my-tmy)*0.06;
+    ctx.clearRect(0,0,W,H);
+    const dim = 1 - pScroll*0.92;                     // fade as we scroll away
+    const par = (tmx-0.5), parY=(tmy-0.5);
+    ctx.globalCompositeOperation='lighter';
+    for(const h of hexes){
+      const px = h.x + par*38*(0.4+h.depth) ;
+      const py = h.y - pScroll*70*(0.3+h.depth) + parY*16*h.depth;
+      const pulse = 0.72 + 0.28*Math.sin(t*h.sp + h.ph);
+      const lum = h.base*pulse*dim;
+      if(lum<=0.01) continue;
+      // glow
+      ctx.shadowBlur = 26*h.depth+8; ctx.shadowColor = 'rgba(198,222,255,'+(lum*0.9)+')';
+      ctx.strokeStyle = 'rgba(234,241,255,'+lum+')';
+      ctx.lineWidth = 1.4+h.depth*1.4;
+      hexPath(px,py,h.r*0.9);
+      ctx.stroke();
+      // inner cool fill for the tube-light feel
+      ctx.shadowBlur=0;
+      ctx.strokeStyle='rgba(255,255,255,'+(lum*0.5)+')';
+      ctx.lineWidth=0.6;
+      hexPath(px,py,h.r*0.9);
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation='source-over';
+    ctx.shadowBlur=0;
+    requestAnimationFrame(draw);
+  }
+  function onScroll(){
+    const hero = document.querySelector('.hero');
+    const hb = hero.getBoundingClientRect();
+    scrollN = Math.min(1, Math.max(0, -hb.top / hb.height));
+  }
+  window.addEventListener('resize', build, {passive:true});
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('mousemove', e=>{ mx=e.clientX/window.innerWidth; my=e.clientY/window.innerHeight; }, {passive:true});
+  build(); onScroll(); requestAnimationFrame(draw);
+})();
+
+/* ---------- LENIS SMOOTH SCROLL ---------- */
+if(!RM){
+  const lenis = new Lenis({duration:1.05, smoothWheel:true, syncTouch:false, easing:t=>1-Math.pow(1-t,3)});
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  lenis.on('scroll', ()=>{ if(window.__st) ScrollTrigger.update(); });
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id=a.getAttribute('href'); if(id.length<2) return;
+      const el=document.querySelector(id); if(el){ e.preventDefault(); lenis.scrollTo(el,{offset:-20}); }
+    });
+  });
+}
+
+/* ---------- REVEAL ON SCROLL ---------- */
+const io = new IntersectionObserver((ents)=>{
+  ents.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+},{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4)*0.06+'s'; io.observe(el); });
+
+/* ---------- MJ IMAGE-EXPANSION ---------- */
+if(!RM && window.gsap){
+  window.__st=true; gsap.registerPlugin(ScrollTrigger);
+  gsap.to('#mjimg',{scale:1.0, ease:'none', scrollTrigger:{trigger:'.story-img',start:'top 85%',end:'bottom 20%',scrub:true}});
+  gsap.utils.toArray('.academy .abg img').forEach(img=>{
+    gsap.fromTo(img,{yPercent:-8},{yPercent:8,ease:'none',scrollTrigger:{trigger:'.academy',start:'top bottom',end:'bottom top',scrub:true}});
+  });
+}
+
+/* ---------- MAGNETIC BUTTONS ---------- */
+if(!RM){
+  document.querySelectorAll('.btn').forEach(b=>{
+    b.addEventListener('mousemove',e=>{
+      const r=b.getBoundingClientRect();
+      const x=(e.clientX-r.left-r.width/2)/r.width, y=(e.clientY-r.top-r.height/2)/r.height;
+      b.style.transform=`translate(${x*7}px,${y*7}px)`;
+    });
+    b.addEventListener('mouseleave',()=>{ b.style.transform=''; });
+  });
+}
+
+/* ---------- NAV shrink ---------- */
+let last=0;
+window.addEventListener('scroll',()=>{
+  const n=document.getElementById('nav');
+  n.style.padding = window.scrollY>40 ? '10px 0' : '18px 0';
+},{passive:true});
+</script>
+</body>
+</html>
