@@ -95,18 +95,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:
 @keyframes rise{to{opacity:1;transform:translateY(0)}}
 @keyframes lnRise{to{transform:translateY(0)}}
 
-/* TRUST MARQUEE (stats + real media logos) */
-.trust{position:relative;z-index:2;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);background:var(--ink2);overflow:hidden;padding:26px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.trust .track{display:inline-flex;align-items:center;white-space:nowrap;animation:scroll 46s linear infinite;will-change:transform}
-.trust:hover .track{animation-play-state:paused}
-.ti{display:inline-flex;align-items:baseline;gap:11px;margin:0 30px}
-.ti .n{font-family:"Anton";font-size:clamp(24px,2.6vw,34px);line-height:1;letter-spacing:.01em}
+/* STATS MARQUEE (numbers only) */
+.statmarq{position:relative;z-index:2;border-top:1px solid var(--line2);background:var(--ink2);overflow:hidden;padding:22px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.statmarq .track{display:inline-flex;align-items:center;white-space:nowrap;animation:scroll 48s linear infinite;will-change:transform}
+.statmarq:hover .track{animation-play-state:paused}
+.ti{display:inline-flex;align-items:baseline;gap:11px;margin:0 28px}
+.ti .n{font-family:"Anton";font-size:clamp(22px,2.4vw,32px);line-height:1;letter-spacing:.01em}
 .ti .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-.ti.logo{align-items:center}
-.ti.logo .flabel{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
-.tlogo{height:26px;width:auto;filter:brightness(0) invert(1);opacity:.62;transition:opacity .4s var(--easea)}
-.trust:hover .tlogo{opacity:.85}
-.tsep{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.25);margin:0 4px}
+.tsep{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.22);margin:0 2px}
+/* PRESS / AS FEATURED ON — separate logo banner */
+.pressbar{position:relative;z-index:2;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);background:var(--ink);padding:28px 20px;display:flex;align-items:center;justify-content:center;gap:clamp(18px,4vw,46px);flex-wrap:wrap}
+.pressbar .flabel{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint)}
+.pressbar img{height:30px;width:auto;filter:brightness(0) invert(1);opacity:.58;transition:opacity .4s var(--easea)}
+.pressbar img:hover{opacity:.92}
+.pressbar .pdiv{width:1px;height:28px;background:var(--line)}
 
 /* MARQUEE */
 .marq{border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding:20px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:2;background:var(--ink2)}
@@ -309,20 +311,26 @@ footer{border-top:1px solid var(--line);padding:60px 0 46px;position:relative;z-
   <div class="scrollcue"><div class="bar"></div><span>Scroll</span></div>
 </header>
 
-<!-- TRUST MARQUEE -->
-<section class="trust" aria-label="Proof and press">
+<!-- STATS MARQUEE -->
+<section class="statmarq" aria-label="Proof in numbers">
   <div class="track">
     <span class="ti"><span class="n chrome">4.6★</span><span class="l">230 Google reviews</span></span><span class="tsep"></span>
     <span class="ti"><span class="n chrome">553K</span><span class="l">TikTok community</span></span><span class="tsep"></span>
-    <span class="ti logo"><span class="flabel">As featured on</span><img class="tlogo" src="./assets/sbs.svg" alt="SBS World News" /><img class="tlogo" src="./assets/nine.svg" alt="Channel 9" /></span><span class="tsep"></span>
     <span class="ti"><span class="n chrome">11M</span><span class="l">Likes &amp; counting</span></span><span class="tsep"></span>
     <span class="ti"><span class="n chrome">100%</span><span class="l">Owner on the floor</span></span><span class="tsep"></span>
     <span class="ti"><span class="n chrome">4.6★</span><span class="l">230 Google reviews</span></span><span class="tsep"></span>
     <span class="ti"><span class="n chrome">553K</span><span class="l">TikTok community</span></span><span class="tsep"></span>
-    <span class="ti logo"><span class="flabel">As featured on</span><img class="tlogo" src="./assets/sbs.svg" alt="SBS World News" /><img class="tlogo" src="./assets/nine.svg" alt="Channel 9" /></span><span class="tsep"></span>
     <span class="ti"><span class="n chrome">11M</span><span class="l">Likes &amp; counting</span></span><span class="tsep"></span>
     <span class="ti"><span class="n chrome">100%</span><span class="l">Owner on the floor</span></span><span class="tsep"></span>
   </div>
+</section>
+
+<!-- AS FEATURED ON -->
+<section class="pressbar" aria-label="As featured on">
+  <span class="flabel">As featured on</span>
+  <img src="./assets/sbs.svg" alt="SBS World News" />
+  <span class="pdiv"></span>
+  <img src="./assets/nine.svg" alt="Channel 9" />
 </section>
 
 <!-- MARQUEE -->
